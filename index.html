@@ -11,19 +11,26 @@
             --pink-dark: #ff5c8d;
             --white: #ffffff;
             --gray-light: #f1f1f1;
+            --bg-app: #f0f2f5;
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: var(--pink-light);
+            background-color: var(--bg-app);
             margin: 0; display: flex; justify-content: center; height: 100vh; width: 100vw; overflow: hidden;
         }
 
         .app-container {
-            background: var(--white); width: 100%; max-width: 500px; height: 100%;
-            display: flex; flex-direction: column; position: relative;
+            background: var(--white); 
+            width: 100%; 
+            max-width: 500px; 
+            height: 100%;
+            display: flex; 
+            flex-direction: column; 
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
         }
 
         /* --- LOGIN VIEW --- */
@@ -34,52 +41,71 @@
         }
         #login-container h2 { color: var(--pink-dark); font-size: 28px; margin-bottom: 5px; }
         .login-subtitle { color: #888; font-size: 14px; margin-bottom: 30px; }
-        #profile-preview { width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 5px solid var(--white); box-shadow: 0 8px 20px rgba(255, 133, 161, 0.4); margin-bottom: 15px; }
-        input#username { width: 100%; max-width: 300px; padding: 15px; margin: 10px 0; border: 2px solid #ffccd5; border-radius: 20px; outline: none; font-size: 16px; text-align: center; }
-        .btn-main { background: var(--pink-main); color: white; border: none; padding: 15px 40px; border-radius: 20px; cursor: pointer; font-weight: bold; width: 100%; max-width: 300px; box-shadow: 0 4px 15px rgba(255, 133, 161, 0.4); font-size: 16px; }
+        #profile-preview { 
+            width: 130px; height: 130px; border-radius: 50%; object-fit: cover; 
+            border: 5px solid var(--white); box-shadow: 0 8px 20px rgba(255, 133, 161, 0.4); 
+            margin-bottom: 15px; cursor: pointer;
+        }
+        input#username { 
+            width: 100%; max-width: 300px; padding: 15px; margin: 10px 0; 
+            border: 2px solid #ffccd5; border-radius: 20px; outline: none; 
+            font-size: 16px; text-align: center;
+        }
+        .btn-main { 
+            background: var(--pink-main); color: white; border: none; padding: 15px 40px; 
+            border-radius: 20px; cursor: pointer; font-weight: bold; width: 100%; 
+            max-width: 300px; box-shadow: 0 4px 15px rgba(255, 133, 161, 0.4); font-size: 16px;
+        }
 
         /* --- CHAT HEADER --- */
-        .chat-header { padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; background: white; z-index: 10; }
-        .logout-btn { background: none; border: 1.5px solid var(--pink-main); color: var(--pink-main); padding: 6px 10px; border-radius: 15px; font-size: 11px; font-weight: bold; cursor: pointer; }
+        .chat-header { 
+            padding: 10px 15px; display: flex; justify-content: space-between; 
+            align-items: center; border-bottom: 1px solid #eee; background: white; 
+            z-index: 10; height: 65px;
+        }
+        .logout-btn { background: none; border: 1.5px solid var(--pink-main); color: var(--pink-main); padding: 6px 12px; border-radius: 15px; font-size: 11px; font-weight: bold; cursor: pointer; }
         .status-online { display: block; font-size: 11px; color: #4caf50; font-weight: normal; margin-top: 2px; }
+        .status-typing { display: none; font-size: 11px; color: var(--pink-main); font-style: italic; font-weight: bold; margin-top: 2px; }
 
         /* --- MESSAGES AREA --- */
-        #messages { flex: 1; padding: 15px; overflow-y: auto; background-color: #fafafa; background-size: cover; background-position: center; display: flex; flex-direction: column; scroll-behavior: smooth; }
-        .date-divider { align-self: center; background: rgba(225, 243, 251, 0.9); color: #555; font-size: 11px; padding: 5px 15px; border-radius: 10px; margin: 10px 0; font-weight: bold; }
+        #messages { 
+            flex: 1; padding: 15px; overflow-y: auto; background-color: #f7f7f7; 
+            background-size: cover; background-position: center; display: flex; 
+            flex-direction: column; scroll-behavior: smooth;
+        }
+        .date-divider { align-self: center; background: rgba(225, 243, 251, 0.9); color: #555; font-size: 11px; padding: 5px 15px; border-radius: 10px; margin: 15px 0; font-weight: bold; }
 
-        .message-wrapper { display: flex; margin-bottom: 12px; width: 100%; align-items: flex-end; animation: msgPop 0.3s ease; }
+        .message-wrapper { display: flex; margin-bottom: 15px; width: 100%; align-items: flex-end; animation: msgPop 0.3s ease; }
         @keyframes msgPop { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .message-wrapper.sent { flex-direction: row-reverse; }
-        .user-avatar { width: 32px; height: 32px; border-radius: 50%; margin: 0 8px; object-fit: cover; flex-shrink: 0; }
+        
+        .user-avatar { width: 35px; height: 35px; border-radius: 50%; margin: 0 8px; object-fit: cover; flex-shrink: 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 
-        /* --- BUBBLE & TITIK 3 (FIXED) --- */
         .message { 
             padding: 10px 14px; border-radius: 18px; font-size: 15px; position: relative; 
-            max-width: 75%; word-wrap: break-word; display: inline-block;
+            max-width: 75%; word-wrap: break-word; display: inline-block; line-height: 1.4;
         }
         .sent .message { background: var(--pink-main); color: white; border-bottom-right-radius: 4px; }
-        .received .message { background: var(--gray-light); color: #333; border-bottom-left-radius: 4px; }
+        .received .message { background: var(--white); color: #333; border-bottom-left-radius: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
 
-        .menu-dots { 
-            cursor: pointer; font-size: 14px; padding: 0 5px; margin-left: 8px; 
-            opacity: 0.6; display: inline-block; vertical-align: middle;
-        }
+        .menu-dots { cursor: pointer; font-size: 16px; padding: 0 2px; margin-left: 8px; opacity: 0.5; vertical-align: middle; }
+        .sent .menu-dots { color: white; }
+
         .msg-options { 
             display: none; position: absolute; background: white; border: 1px solid #ddd; 
             border-radius: 10px; z-index: 100; box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
-            width: 80px; top: 100%; right: 0; overflow: hidden;
+            width: 90px; top: 30px; right: 5px; overflow: hidden;
         }
-        .msg-options button { width: 100%; border: none; background: none; padding: 8px; font-size: 11px; cursor: pointer; color: #333; text-align: left; }
-        .msg-options button:hover { background: #f5f5f5; }
+        .msg-options button { width: 100%; border: none; background: none; padding: 10px; font-size: 12px; cursor: pointer; color: #333; text-align: left; }
 
-        .message-time { font-size: 10px; display: block; margin-top: 4px; opacity: 0.7; text-align: right; }
+        .message-time { font-size: 10px; display: block; margin-top: 5px; opacity: 0.7; text-align: right; }
 
-        /* --- INPUT --- */
-        .input-section { padding: 10px 15px; display: flex; background: white; border-top: 1px solid #eee; align-items: center; gap: 10px; }
-        .input-section input { margin: 0; border: 1px solid #eee; padding: 12px 15px; border-radius: 25px; flex: 1; outline: none; background: #f9f9f9; }
-        .send-btn-circle { width: 42px; height: 42px; background: var(--pink-main); border-radius: 50%; border: none; color: white; flex-shrink: 0; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        /* --- INPUT AREA --- */
+        .input-section { padding: 12px 15px; display: flex; background: white; border-top: 1px solid #eee; align-items: center; gap: 10px; }
+        .input-section input { margin: 0; border: 1px solid #eee; padding: 12px 18px; border-radius: 25px; flex: 1; outline: none; background: #f9f9f9; font-size: 15px; }
+        .send-btn-circle { width: 45px; height: 45px; background: var(--pink-main); border-radius: 50%; border: none; color: white; flex-shrink: 0; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
 
-        #romantic-overlay { display: none; position: fixed; inset: 0; background: rgba(255,255,255,0.96); z-index: 2000; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 30px; }
+        #romantic-overlay { display: none; position: fixed; inset: 0; background: rgba(255,255,255,0.98); z-index: 2000; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 30px; }
     </style>
 </head>
 <body>
@@ -97,7 +123,7 @@
         <div id="login-container">
             <h2>Chat Romantis 💖</h2>
             <p class="login-subtitle">Ruang pribadi untuk cinta kita</p>
-            <img id="profile-preview" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" onclick="document.getElementById('profile-input').click()" style="cursor:pointer">
+            <img id="profile-preview" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" onclick="document.getElementById('profile-input').click()">
             <input type="file" id="profile-input" accept="image/*" hidden>
             <input type="text" id="username" placeholder="Nama panggilanmu?">
             <button class="btn-main" id="loginBtn">Mulai Obrolan ❤️</button>
@@ -107,29 +133,30 @@
             <div class="chat-header">
                 <button class="logout-btn" id="logoutBtn">Keluar</button>
                 <div style="text-align: center; flex: 1;">
-                    <span style="font-size: 14px; font-weight: bold; color: #333;">💞 Sayangku</span>
-                    <span class="status-online">● online</span>
+                    <span style="font-size: 15px; font-weight: bold; color: #333;">💞 Sayangku</span>
+                    <span id="status-online" class="status-online">● online</span>
+                    <span id="status-typing" class="status-typing">sedang mengetik...</span>
                 </div>
-                <div style="display:flex; gap:10px; align-items:center;">
-                    <button id="del-bg" style="background:none; border:none; font-size:12px; cursor:pointer;" title="Hapus Background">🗑️</button>
-                    <label for="bg-upload" style="font-size: 18px; cursor: pointer;">🖼️</label>
+                <div style="display:flex; gap:12px; align-items:center;">
+                    <button id="del-bg" style="background:none; border:none; font-size:14px; cursor:pointer;" title="Hapus BG">🗑️</button>
+                    <label for="bg-upload" style="font-size: 20px; cursor: pointer;">🖼️</label>
                     <input type="file" id="bg-upload" accept="image/*" hidden>
                 </div>
             </div>
 
             <div id="messages"></div>
 
-            <div id="reply-preview-box" style="display:none; padding: 8px 15px; background: #f9f9f9; border-top: 1px solid #eee; border-left: 4px solid var(--pink-main);">
+            <div id="reply-preview-box" style="display:none; padding: 10px 15px; background: #fff; border-top: 1px solid #eee; border-left: 5px solid var(--pink-main);">
                 <div style="display:flex; justify-content:space-between; color:var(--pink-main); font-weight:bold; font-size: 12px;">
                     <span>Membalas <span id="reply-to-user"></span></span>
-                    <button onclick="cancelReply()" style="border:none; background:none; color:red; cursor:pointer;">✕</button>
+                    <button onclick="cancelReply()" style="border:none; background:none; color:red; cursor:pointer; font-weight:bold;">✕</button>
                 </div>
-                <div id="reply-text-preview" style="color:#666; font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></div>
+                <div id="reply-text-preview" style="color:#666; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top:2px;"></div>
             </div>
 
             <div class="input-section">
-                <span id="emoji-trigger" style="font-size:24px; cursor:pointer;">😊</span>
-                <input type="text" id="messageInput" placeholder="Ketik pesan manis..." autocomplete="off">
+                <span id="emoji-trigger" style="font-size:26px; cursor:pointer;">😊</span>
+                <input type="text" id="messageInput" placeholder="Tulis sesuatu yang manis..." autocomplete="off">
                 <button class="send-btn-circle" id="sendBtn">➤</button>
             </div>
         </div>
@@ -137,7 +164,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-        import { getDatabase, ref, push, onChildAdded, onChildRemoved, remove, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+        import { getDatabase, ref, push, onChildAdded, onChildRemoved, onValue, set, remove, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCB3fiu9y050yH4N_4RfnYxfiQLl2gTHhk",
@@ -158,6 +185,7 @@
         let lastDateShown = ""; 
         let isTabActive = true;
 
+        function requestNotifPermission() { if ("Notification" in window) Notification.requestPermission(); }
         window.onfocus = () => { isTabActive = true; document.title = "Chat Romantis 💖"; };
         window.onblur = () => { isTabActive = false; };
 
@@ -171,13 +199,15 @@
                 currentUser = name;
                 localStorage.setItem("chat_user", name);
                 localStorage.setItem("chat_photo", userPhoto);
-                push(ref(db, 'messages'), { type: 'system', text: `✨ ${name} baru saja bergabung...`, time: serverTimestamp() });
+                requestNotifPermission();
+                push(ref(db, 'messages'), { type: 'system', text: `✨ ${name} masuk ke obrolan...`, time: serverTimestamp() });
                 showChat();
             }
         };
 
         document.getElementById('logoutBtn').onclick = () => {
-            push(ref(db, 'messages'), { type: 'system', text: `💔 ${currentUser} pergi sebentar...`, time: serverTimestamp() });
+            set(ref(db, `typing/${currentUser}`), false);
+            push(ref(db, 'messages'), { type: 'system', text: `💔 ${currentUser} keluar...`, time: serverTimestamp() });
             localStorage.clear(); location.reload();
         };
 
@@ -185,6 +215,41 @@
             document.getElementById('login-container').style.display = 'none';
             document.getElementById('chat-container').style.display = 'flex';
             startListening();
+            setupTypingIndicator();
+        }
+
+        // --- FITUR MENGETIK ---
+        function setupTypingIndicator() {
+            const inputField = document.getElementById('messageInput');
+            let typingTimeout;
+
+            inputField.addEventListener('input', () => {
+                set(ref(db, `typing/${currentUser}`), true);
+                clearTimeout(typingTimeout);
+                typingTimeout = setTimeout(() => {
+                    set(ref(db, `typing/${currentUser}`), false);
+                }, 2000);
+            });
+
+            onValue(ref(db, 'typing'), (snapshot) => {
+                const typingUsers = snapshot.val() || {};
+                let someoneTyping = false;
+                for (let user in typingUsers) {
+                    if (user !== currentUser && typingUsers[user] === true) {
+                        someoneTyping = true;
+                        break;
+                    }
+                }
+                const onlineText = document.getElementById('status-online');
+                const typingText = document.getElementById('status-typing');
+                if (someoneTyping) {
+                    onlineText.style.display = 'none';
+                    typingText.style.display = 'block';
+                } else {
+                    onlineText.style.display = 'block';
+                    typingText.style.display = 'none';
+                }
+            });
         }
 
         document.getElementById('del-bg').onclick = () => {
@@ -195,7 +260,8 @@
         window.openOptions = (e, key) => {
             e.stopPropagation();
             document.querySelectorAll('.msg-options').forEach(el => el.style.display = 'none');
-            document.getElementById(`opt-${key}`).style.display = 'block';
+            const opt = document.getElementById(`opt-${key}`);
+            if(opt) opt.style.display = 'block';
         };
 
         window.initReply = (key, sender, text) => {
@@ -219,6 +285,7 @@
         const sendMessage = () => {
             const inputField = document.getElementById('messageInput');
             if (inputField.value.trim()) {
+                set(ref(db, `typing/${currentUser}`), false);
                 push(ref(db, 'messages'), { sender: currentUser, photo: userPhoto, text: inputField.value, replyTo: selectedReply, time: serverTimestamp() });
                 inputField.value = "";
                 cancelReply();
@@ -234,7 +301,6 @@
                 const data = snapshot.val();
                 const key = snapshot.key;
                 const messagesDiv = document.getElementById('messages');
-                
                 const dateObj = data.time ? new Date(data.time) : new Date();
                 const dateString = dateObj.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
 
@@ -249,7 +315,8 @@
                 if(data.type === 'system') {
                     const note = document.createElement('div');
                     note.className = 'date-divider'; 
-                    note.style.background = '#ffeef2';
+                    note.style.background = 'rgba(255,133,161,0.1)';
+                    note.style.color = 'var(--pink-dark)';
                     note.innerText = data.text;
                     messagesDiv.appendChild(note);
                     messagesDiv.scrollTop = messagesDiv.scrollHeight;
@@ -257,11 +324,14 @@
                 }
 
                 const isMine = data.sender === currentUser;
-                
-                // Fitur Notifikasi
                 if(!isMine) {
                     document.getElementById('notif-sound').play().catch(()=>{});
-                    if(!isTabActive) document.title = "📩 Pesan Baru!";
+                    if(!isTabActive) {
+                        document.title = "📩 Pesan Baru!";
+                        if (Notification.permission === "granted") {
+                            new Notification("Chat Romantis 💖", { body: `${data.sender}: ${data.text}`, icon: data.photo });
+                        }
+                    }
                 }
 
                 const time = dateObj.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
@@ -269,14 +339,15 @@
                 wrapper.className = `message-wrapper ${isMine ? 'sent' : 'received'}`;
                 wrapper.id = `msg-${key}`;
                 
-                let replyHtml = data.replyTo ? `<div style="font-size:10px; background:rgba(0,0,0,0.05); padding:5px; border-radius:8px; border-left:3px solid var(--pink-main); margin-bottom:5px;"><b>${data.replyTo.sender}</b><br>${data.replyTo.text}</div>` : '';
+                let replyHtml = data.replyTo ? `<div style="font-size:11px; background:rgba(0,0,0,0.05); padding:6px; border-radius:8px; border-left:3px solid var(--pink-main); margin-bottom:6px;"><b>${data.replyTo.sender}</b><br>${data.replyTo.text}</div>` : '';
 
                 wrapper.innerHTML = `
                     <img src="${data.photo}" class="user-avatar">
                     <div class="message">
-                        <small style="font-weight:bold; opacity:0.7; font-size:10px; display:block; margin-bottom:2px;">
-                            ${data.sender} <span class="menu-dots" onclick="openOptions(event, '${key}')">⋮</span>
-                        </small>
+                        <div style="font-weight:bold; opacity:0.7; font-size:11px; margin-bottom:3px; display:flex; justify-content:space-between; align-items:center;">
+                            ${data.sender} 
+                            <span class="menu-dots" onclick="openOptions(event, '${key}')">⋮</span>
+                        </div>
                         <div id="opt-${key}" class="msg-options">
                             <button onclick="initReply('${key}', '${data.sender}', '${data.text}')">Balas</button>
                             ${isMine ? `<button style="color:red" onclick="deleteMsg('${key}')">Hapus</button>` : ''}
@@ -293,7 +364,6 @@
         }
 
         document.addEventListener('click', () => document.querySelectorAll('.msg-options').forEach(el => el.style.display = 'none'));
-
         document.getElementById('profile-input').onchange = (e) => {
             const reader = new FileReader();
             reader.onload = (ev) => {
@@ -302,7 +372,6 @@
             };
             reader.readAsDataURL(e.target.files[0]);
         };
-        
         document.getElementById('bg-upload').onchange = (e) => {
             const reader = new FileReader();
             reader.onload = (ev) => {
@@ -311,7 +380,6 @@
             };
             reader.readAsDataURL(e.target.files[0]);
         };
-
         const savedBg = localStorage.getItem("chat_bg");
         if(savedBg) document.getElementById('messages').style.backgroundImage = `url(${savedBg})`;
     </script>
